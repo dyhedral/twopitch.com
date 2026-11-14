@@ -1,0 +1,21 @@
+/* Twopitch colour, type and spacing tokens. Phone first. */
+@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("fonts/instrument-sans-latin.woff2") format("woff2"); }
+@font-face { font-family: "Spline Sans Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/spline-sans-mono-500-latin.woff2") format("woff2"); }
+:root {
+  --bg: #f3f5f4; --surface: #ffffff; --text: #17212b; --text-2: #4a5763; --text-3: #6f7b86;
+  --rule: #d5dadd; --rule-strong: #17212b;
+  --signal: #f4c531;            /* yolk: fills and marks only */
+  --signal-text: #6b5200;       /* the signal as text on a light background */
+  --link: #1f5fa8; --danger: #b3261e;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, Menlo, monospace;
+  --r-s: 6px; --r-m: 10px; --r-l: 16px;
+  --gutter: 16px; --measure: 34rem;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 40px; --s7: 64px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121a22; --surface: #1a242e; --text: #eef1f3; --text-2: #a9b4bd; --text-3: #7f8b96;
+  --rule: #2a3642; --rule-strong: #eef1f3; --signal-text: #f4c531; --link: #8fbdf0; --danger: #ff8a7d; } }
+:root[data-theme="dark"] {
+  --bg: #121a22; --surface: #1a242e; --text: #eef1f3; --text-2: #a9b4bd; --text-3: #7f8b96;
+  --rule: #2a3642; --rule-strong: #eef1f3; --signal-text: #f4c531; --link: #8fbdf0; --danger: #ff8a7d; }

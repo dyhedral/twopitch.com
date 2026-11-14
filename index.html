@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twopitch: a shared assistant for two</title>
+<meta name="description" content="A shared assistant for two people and one home. In development.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3f5f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121a22" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://twopitch.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Twopitch: a shared assistant for two">
+<meta property="og:description" content="A shared assistant for two people and one home. In development.">
+<meta property="og:url" content="https://twopitch.com/">
+<meta property="og:image" content="https://twopitch.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* One column on a phone with 16px gutters; hero and paper sit side by side from 760px. */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 1.0625rem/1.5 var(--font-sans); }
+  img, svg { max-width: 100%; height: auto; display: block; }
+  a { color: var(--link); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 var(--gutter); }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(2.5rem, 11vw, 4.75rem); }
+  h2 { font-size: clamp(1.75rem, 6.5vw, 2.75rem); }
+  h3 { font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.2; }
+  p { margin: 0; max-width: var(--measure); }
+  .lede { font-size: 1.1875rem; color: var(--text-2); margin-top: var(--s4); }
+  .hl { background: var(--signal); color: #17212b; padding: 0 0.12em; border-radius: var(--r-s); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .tag { display: inline-block; font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); border: 1px solid var(--rule); border-radius: var(--r-s); padding: 0.4rem 0.5rem; white-space: nowrap; }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s4) 0; }
+  .brand { display: inline-flex; align-items: center; gap: var(--s2); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--text); text-decoration: none; min-height: 44px; }
+  .brand svg { width: 34px; height: 27px; } .brand svg .ink { stroke: var(--text); }
+
+  .hero { padding: var(--s6) 0 var(--s6); display: grid; gap: var(--s6); }
+  .wait { margin-top: var(--s5); color: var(--text-2); }
+  .wait a { display: inline-block; padding: 12px 0; }
+
+  figure.paper { margin: 0; }
+  figure.paper .sheet { background: #fff; border: 1px solid var(--rule); border-radius: var(--r-s); overflow: hidden; }
+  figure.paper img { width: 100%; background: #fff; }
+  figure.paper figcaption { font-size: 0.875rem; color: var(--text-2); margin-top: var(--s2); }
+
+  section.band { border-top: 3px solid var(--rule-strong); padding: var(--s6) 0; }
+  section.band > p { margin-top: var(--s4); color: var(--text-2); }
+  .ledger { list-style: none; margin: var(--s5) 0 0; padding: 0; border-top: 1px solid var(--rule); }
+  .ledger li { display: grid; gap: var(--s1); padding: var(--s4) 0; border-bottom: 1px solid var(--rule); }
+  .ledger p { color: var(--text-2); }
+  .plans { display: grid; gap: var(--s4); margin-top: var(--s5); }
+  .plan { border: 1px solid var(--rule); border-radius: var(--r-l); padding: var(--s5); background: var(--surface); }
+  .plan .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin: var(--s2) 0; }
+  .plan .price small { font-size: 1rem; font-weight: 400; letter-spacing: 0; color: var(--text-2); }
+  .plan p { color: var(--text-2); }
+  footer a { display: inline-block; padding: 12px 0; }
+  footer nav { display: flex; flex-wrap: wrap; column-gap: var(--s5); }
+  footer p { max-width: none; }
+  .f-brand strong { color: var(--text); margin-right: var(--s2); }
+  footer { border-top: 1px solid var(--rule); padding: var(--s5) 0 var(--s6); color: var(--text-2); font-size: 0.9375rem; display: grid; gap: var(--s2); }
+
+  @media (min-width: 760px) {
+    :root { --gutter: 32px; }
+    .hero { grid-template-columns: 1.05fr 0.95fr; align-items: center; padding: var(--s7) 0; }
+    .ledger li { grid-template-columns: 16rem 1fr; gap: var(--s5); align-items: baseline; }
+    .plans { grid-template-columns: 1fr 1fr; }
+    section.band { padding: var(--s7) 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/" aria-label="Twopitch, home">
+      <svg viewBox="0 0 40 32" aria-hidden="true"><path d="M15 27 L25 9 L35 27 Z" fill="#f4c531" class="ink" stroke-width="3" stroke-linejoin="round"/><path d="M5 27 L15 9 L25 27" fill="none" class="ink" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      Twopitch
+    </a>
+    <span class="tag">In development</span>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="h">
+      <div>
+        <h1 id="h">A shared assistant <span class="hl">for two</span>.</h1>
+        <p class="lede">One helper for the pair of you: what is on today, whose turn it is, what the house needs.</p>
+        <p class="wait" id="waitlist">The waitlist opens soon. Write to <a href="mailto:hello@twopitch.com">hello@twopitch.com</a>.</p>
+      </div>
+      <figure class="paper" id="paper">
+        <div class="sheet"><picture><source media="(max-width: 759px)" srcset="paper-sample-phone.png" width="1056" height="1046"><img src="paper-sample.png" width="1576" height="1364" alt="A printed morning paper for San Francisco with a greeting to Robin and a table of today's events."></picture></div>
+        <figcaption>Your day, printed. A made-up sample.</figcaption>
+      </figure>
+    </section>
+
+    <section class="band" aria-labelledby="h-home">
+      <h2 id="h-home">Meant to stay home.</h2>
+      <p>Twopitch is being built to run on a computer you own, with local models, so household details can stay with you. Today's build still sends some work to hosted services.</p>
+      <ul class="ledger">
+        <li><h3>Seen before it is sent</h3><p>Planned: nothing goes out until you have seen it.</p></li>
+        <li><h3>Two people, two views</h3><p>Planned: each person has private notes the other does not see.</p></li>
+      </ul>
+    </section>
+
+    <section class="band" aria-labelledby="h-open">
+      <h2 id="h-open">Open tools for running a home.</h2>
+      <p>The code will be open source. Planned: it works alongside Home Assistant, so your sensors and switches feed the same day.</p>
+    </section>
+
+    <section class="band" aria-labelledby="h-price">
+      <h2 id="h-price">Free to run, once the code is out.</h2>
+      <div class="plans">
+        <div class="plan"><h3>Open code</h3><div class="price">Free</div><p>Run it yourself, at home.</p></div>
+        <div class="plan"><h3>Extras</h3><div class="price">$10 <small>a month, planned</small></div><p>Hosting, remote access, managed updates.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="f-brand"><strong>Twopitch</strong> A shared assistant for two.</p>
+    <nav aria-label="Footer">
+      <a href="#paper">The paper</a>
+      <a href="#h-home">Stays home</a>
+      <a href="#h-open">Open tools</a>
+      <a href="#h-price">Pricing</a>
+      <a href="https://dyhedral.com">Dyhedral</a>
+    </nav>
+    <p>The waitlist opens soon. Write to <a href="mailto:hello@twopitch.com">hello@twopitch.com</a>.</p>
+    <p>&copy; 2026 Dyhedral LLC. All rights reserved.</p>
+  </footer>
+</div>
+</body>
+</html>

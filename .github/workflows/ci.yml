@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  html:
+    name: html (validate, h1)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Validate HTML
+        run: npx --yes html-validate@10 "**/*.html"
+      - name: One h1 per page, 200 words at most
+        run: python3 -I .github/scripts/check_html.py --max-words 200
+
+  links:
+    name: link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Check href/src with lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
+        with:
+          # mailto: links are not checked (lychee default). Failures are errors.
+          args: >-
+            --no-progress --include-fragments --max-retries 3 --retry-wait-time 5
+            --exclude '^https://twopitch\.com/?$'
+            --root-dir ${{ github.workspace }}
+            './**/*.html'
+          fail: true
+          jobSummary: true
