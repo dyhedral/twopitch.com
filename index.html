@@ -62,14 +62,21 @@
   .plan .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin: var(--s2) 0; }
   .plan .price small { font-size: 1rem; font-weight: 400; letter-spacing: 0; color: var(--text-2); }
   .plan p { color: var(--text-2); }
-  footer a { display: inline-block; padding: 12px 0; }
-  footer nav { display: flex; flex-wrap: wrap; column-gap: var(--s5); }
-  footer p { max-width: none; }
-  .f-brand strong { color: var(--text); margin-right: var(--s2); }
-  footer { border-top: 1px solid var(--rule); padding: var(--s5) 0 var(--s6); color: var(--text-2); font-size: 0.9375rem; display: grid; gap: var(--s2); }
+  footer { margin-top: var(--s6); }
+  .site-footer { display: grid; grid-template-columns: 1fr; gap: var(--s5); padding: var(--s5) 0; border-top: 3px solid var(--rule-strong); }
+  .site-footer ul { list-style: none; margin: var(--s2) 0 0; padding: 0; }
+  .site-footer li { padding: var(--s2) 0; color: var(--text-2); font-size: 0.9375rem; }
+  .site-footer li + li { margin-top: 14px; }
+  .site-footer .lab { font: 500 0.75rem/1.3 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+  .site-footer .head { color: var(--text); }
+  .site-footer a { color: var(--text-2); display: inline-block; padding-block: 15px; overflow-wrap: anywhere; }
+  .site-footer a:hover { color: var(--text); }
+  .legal .lab { font: 500 0.75rem/1.3 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2) var(--s5); padding: var(--s4) 0 var(--s6); border-top: 1px solid var(--rule); }
 
   @media (min-width: 760px) {
     :root { --gutter: 32px; }
+    .site-footer { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) var(--s7); }
     .hero { grid-template-columns: 1.05fr 0.95fr; align-items: center; padding: var(--s7) 0; }
     .ledger li { grid-template-columns: 16rem 1fr; gap: var(--s5); align-items: baseline; }
     .plans { grid-template-columns: 1fr 1fr; }
@@ -92,7 +99,7 @@
       <div>
         <h1 id="h">A shared assistant <span class="hl">for two</span>.</h1>
         <p class="lede">One helper for the pair of you: what is on today, whose turn it is, what the house needs.</p>
-        <p class="wait" id="waitlist">The waitlist opens soon. Write to <a href="mailto:hello@twopitch.com">hello@twopitch.com</a>.</p>
+        <p class="wait" id="waitlist">The waitlist opens soon.</p>
       </div>
       <figure class="paper" id="paper">
         <div class="sheet"><picture><source media="(max-width: 759px)" srcset="paper-sample-phone.png" width="1056" height="1046"><img src="paper-sample.png" width="1576" height="1364" alt="A printed morning paper for San Francisco with a greeting to Robin and a table of today's events."></picture></div>
@@ -124,16 +131,29 @@
   </main>
 
   <footer>
-    <p class="f-brand"><strong>Twopitch</strong> A shared assistant for two.</p>
-    <nav aria-label="Footer">
-      <a href="#paper">The paper</a>
-      <a href="#h-home">Stays home</a>
-      <a href="#h-open">Open tools</a>
-      <a href="#h-price">Pricing</a>
-      <a href="https://dyhedral.com">Dyhedral</a>
-    </nav>
-    <p>The waitlist opens soon. Write to <a href="mailto:hello@twopitch.com">hello@twopitch.com</a>.</p>
-    <p>&copy; 2026 Dyhedral LLC. All rights reserved.</p>
+    <div class="site-footer">
+      <div>
+        <div class="lab head">Twopitch</div>
+        <ul>
+          <li class="lab">In development</li>
+        </ul>
+      </div>
+      <div>
+        <div class="lab head">Contact</div>
+        <ul>
+          <li class="lab">Contact details pending</li>
+        </ul>
+      </div>
+      <div>
+        <div class="lab head">Company</div>
+        <ul>
+          <li class="lab"><a href="https://dyhedral.com/">A Dyhedral company</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span class="lab">&copy; 2026 Dyhedral LLC</span>
+    </div>
   </footer>
 </div>
 </body>
